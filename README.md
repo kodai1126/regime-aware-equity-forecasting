@@ -23,7 +23,10 @@ The historical mean is the strongest baseline in this sample. The results do not
 - `src/pit_pipeline.py` — FRED/ALFRED snapshots, transformations, and monthly as-of dataset
 - `src/milestone2_models.py` — feature engineering, walk-forward regressions, and model evaluation
 - `data/features_asof.csv` — saved monthly input data so the baseline can run without downloading data
+- `data/asof_audit.csv` — observation dates and as-of source checks for each series
 - `results/` — saved baseline performance, descriptive statistics, and walk-forward predictions
+- `tests/` — checks for time alignment, data revisions, and the expanding-window models
+- `src/label_availability_sensitivity.py` — one-month target-label availability sensitivity check
 - `requirements.txt` — Python dependencies
 - `.gitignore` — ignores API keys, caches, and local outputs
 
@@ -48,6 +51,20 @@ python src/pit_pipeline.py --start 2005-01 --end 2026-08 --series UNRATE,CPIAUCS
 ```
 
 The pipeline caches API responses locally to avoid repeating requests. Never commit the API key or the raw cache.
+
+## Tests and sensitivity checks
+
+Run the unit tests from the repository root:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+Run the conservative label-availability comparison:
+
+```bash
+python src/label_availability_sensitivity.py --features data/features_asof.csv --original-predictions results/walk_forward_predictions.csv --out output/label_delay
+```
 
 ## Data notes
 

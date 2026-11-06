@@ -1,0 +1,18 @@
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*secret*
+*credentials*
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+# Raw downloads and generated output
+output/
+fred_cache/
+fred_cache.zip
+*.log
+.DS_Store
